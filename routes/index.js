@@ -4,10 +4,8 @@ const router = express.Router();
 
 /* GET home page. */
 router.get("/", controller.index);
-router.post("/", controller.test);
-// router.post("/", controller.webhookPost, () => {
-//   console.log("Hello There");
-// });
+//router.post("/", controller.test);
+router.post("/", controller.webhookPost);
 console.log("INSIDE router.js");
 
 export default router;

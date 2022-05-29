@@ -1,7 +1,6 @@
 import createError from "http-errors";
 import express from "express";
 import http from "http";
-import parser from "body-parser";
 import path from "path";
 import { Server } from "socket.io";
 import indexRouter from "./routes/index.js";
@@ -26,17 +25,16 @@ app.set("view engine", "hbs");
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-//app.use(parser.json());
-//app.use(parser.urlencoded({ extended: false }));
-//export const router = express.Router();
-app.use("/", indexRouter);
-// app.use("/", indexRouter, async (req, res) => {
-//   console.log("IN THE APP.JS");
-//   console.log(req.locals.issueTitle);
 
-//   io.emit("issue-event", res.locals.issueTitle);
-//   res.sendStatus(200);
-// });
+app.use("/", indexRouter);
+
+app.use("/", indexRouter, async (req, res) => {
+  console.log("IN THE APP.JS");
+  console.log(res.locals.issueEvent);
+
+  io.emit("issue-event", res.locals.issueEvent);
+  res.sendStatus(200);
+});
 
 io.on("connection", (socket) => {
   console.log("Connected to: " + socket.id);

@@ -1,7 +1,20 @@
-<h1>Webhooks</h1>
+<h1>Gitlab Webhooks</h1>
 
 <h2>Gitlab Issues:</h2>
+<div id="allIssues">
+  {{#each issueArr}}
+    <div class="issueBox" id="{{this.id}}">
+      <h3>{{this.title}}</h3>
+      <p>Author: {{this.author.username}}</p>
+      <p>{{this.description}}</p>
+      <p class="issueSmall">State: {{this.state}}</p>
+      <p class="issueSmall">Link: <a href="">{{this.web_url}}</a></p>
+      <p class="issueSmall">Creeated at: {{this.created_at}}</p>
+      <p class="issueSmall">Updated at: {{this.updated_at}}</p>
+    </div>
+  {{/each}}
+</div>
 
-{{#each issueArr}}
-  <h3>{{this.title}}</h3>
-{{/each}}
+<h2>Notifications:</h2>
+
+<div id="allNotifications"></div>
